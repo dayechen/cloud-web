@@ -6,7 +6,7 @@ import 'vant/lib/index.css';
 import Config from './common/config';
 
 if (process.env.NODE_ENV === "development") {
-    Config.baseURL = "http:192.168.8080"
+    Config.baseURL = "http://192.168.1.18:8080/"
 } else {
     Config.baseURL = "/"
 }

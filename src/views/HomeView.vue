@@ -12,9 +12,9 @@
 
 
 <script lang="ts" setup>
+import Config from '@/common/config';
 import { get, post } from '@/common/http';
 import { reactive } from 'vue';
-const baseURL = 'http://192.168.1.18:8091'
 const state = reactive({
   active: 0,
   tabInfo: [
@@ -51,12 +51,12 @@ const getPageData = () => {
   post('file/video', {
     page: 1,
     pageSize: 10,
-    random: false
+    random: true
   }).then((res: any) => {
     state.tabInfo[state.active].list = res.data.map((x: any) => {
       return {
-        imgUrl: `${baseURL}${x.thum}`,
-        path: `${baseURL}/video/${x.name}`
+        imgUrl: `${Config.baseURL}${x.thum}`,
+        path: `${Config.baseURL}/video${x.storeIdx}/${x.name}`
       }
     })
     console.log('数据', res)
