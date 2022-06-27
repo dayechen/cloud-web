@@ -50,10 +50,17 @@ const onPlay = (item: any) => {
 const getPageData = () => {
   post('file/video', {
     page: 1,
-    pageSize: 10,
+    pageSize: 16,
     random: true
   }).then((res: any) => {
     state.tabInfo[state.active].list = res.data.map((x: any) => {
+      if (Config.baseURL === '/') {
+        const url = window.location.protocol + "//" + window.location.host
+        return {
+          imgUrl: `${url}${x.thum}`,
+          path: `${url}/video${x.storeIdx}/${x.name}`
+        }
+      }
       return {
         imgUrl: `${Config.baseURL}${x.thum}`,
         path: `${Config.baseURL}/video${x.storeIdx}/${x.name}`
